@@ -1,0 +1,1 @@
+interface User {name: string;age: number;isStudent: boolean;}let user1: User = {name: "Ali",age: 22,isStudent: true};let user2: User = {name: "Sara",age: 25,isStudent: false};console.log("user1 name", user1.name);console.log("user1 age", user1.age);console.log("user2 name", user2.name);console.log("user2 age", user2.age); 
