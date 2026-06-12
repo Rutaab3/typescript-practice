@@ -12,8 +12,7 @@
 2. `ng version` OR `npx ng version` (*check the angular cli version*)
 
 ## Angular Project Setup
-1. `npx @angular/cli@17 new <project-name>` (*creates a new angular project*) [_reply wiyh Y/N and enter to complete the setup_]
-2. ``
+1. `npx @angular/cli@17 new <project-name>` (*creates a new angular project*) [**reply wiyh Y/N and enter to complete the setup**]
 
 ## RUN / COMPILE
 
