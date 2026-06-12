@@ -6,10 +6,14 @@
 4. `npm install typescript --save-dev` (*install TypeScript compiler as a development dependency*)
 5. `npx tsc -v` (*check TypeScript compiler version*)
 
-## Angular Setup
+## Angular Setup Globally
 
 1. `npm install -g @angular/cli` (*install angular cli*)
 2. `ng version` OR `npx ng version` (*check the angular cli version*)
+
+## Angular Project Setup
+1. `npx @angular/cli@17 new <project-name>` (*creates a new angular project*) [_reply wiyh Y/N and enter to complete the setup_]
+2. ``
 
 ## RUN / COMPILE
 
