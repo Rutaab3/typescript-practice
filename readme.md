@@ -15,6 +15,7 @@
 1. `npx @angular/cli@17 new <project-name>` (*creates a new angular project*) [**reply wiyh Y/N and enter to complete the setup**]
 2. `npm install` (*installs all the dependencies*)
 3. `npm runstart` (*starts the dev server*)
+4. npm install firebase @amgular/fire@17
 
 ## RUN / COMPILE
 
