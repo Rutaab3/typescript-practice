@@ -1,0 +1,22 @@
+<div class="app-container">
+  <header>
+    <h1>Cloud Task Manager</h1>
+
+    <p>Angular 17 + Firebase Realtime Database CRUD Application</p>
+  </header>
+
+  <!-- Form Section- Used to created a New Task -->
+  <section>
+    <h2>Create a Task</h2>
+    <form (submit)="onSubmit" class="todo-form">
+      <div class="form-group">
+        <label for="titleInput">Task Name:</label>
+        <input
+          type="text"
+          id="titleInput"
+          name="title"
+        >
+      </div>
+    </form>
+  </section>
+</div>

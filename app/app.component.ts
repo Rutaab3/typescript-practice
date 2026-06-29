@@ -1,0 +1,98 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TaskService } from './task.service';
+import { Task } from './task.model';
+import { Observable } from 'rxjs'; //reactive extension for JS library
+// (Realtime data stream provide karna)
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule,FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent  implements OnInit{
+  private taskService = inject(TaskService);
+  // title = 'todo-app';
+  tasks$!:Observable<Task[]>;
+
+  newTitle: string= '';
+  selectedFile: File | null = null;
+  isSaving : boolean = false;
+
+  editingTaskId: string | null = null;
+  editedTitle:string= '';
+  ngOnInit()  {
+    this.tasks$ = this.taskService.getTasks();
+  }
+  onFileSelected(event:any){
+    const file:File = event.target.files[0];
+    if(file){
+      this.selectedFile= file;
+    }
+  }
+  async onSubmit(){
+    if(!this.newTitle.trim()){
+      alert('Please enter a task name!');
+      return;
+    }
+    this.isSaving= true;
+    try{
+      await this.taskService.addTask(this.newTitle, this.selectedFile);
+
+      this.newTitle= '';
+      this.selectedFile = null;
+
+      const fileInput= document.getElementById('imageInput')as HTMLInputElement;
+      if(fileInput){
+        fileInput.value = '';
+      }
+      }catch(error){
+          console.error('Error adding task', error)
+          alert('failed to add task. please check your console')
+      }finally{
+        this.isSaving = false;
+      }
+    }
+      onToggle(task:Task){
+        if(task.id){
+          this.taskService.updateTaskStatus(task.id, !task.completed);
+        }
+      }
+      onEditClick(task:Task){
+        this.editingTaskId = task.id!;
+        this.editedTitle = task.title;
+      } 
+
+      onCancleEdit(){
+        this.editingTaskId = null;
+        this.editedTitle = '';
+      }
+
+      async onSaveEdit(id: string | undefined){
+        if(!id) return;
+        if(!this.editedTitle.trim()){
+          alert('Task name cannot be empty');
+          return;
+        }try{
+          await this.taskService.updateTaskTitle(id, this.editedTitle.trim());
+          this,this.onCancleEdit();
+
+        }catch(error){
+           console.error('Error updating task', error)
+          alert('failed to update task. please check your console')
+        }
+
+      }
+      async onDelete(id:string | undefined){
+        if(id && confirm("Do you want to delete this task")){
+          try{
+            await this.taskService.deleteTask(id);
+          }catch(error){
+            console.error('Error deletinga task', error)
+          }
+        }
+      }
+  }
